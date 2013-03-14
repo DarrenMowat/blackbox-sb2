@@ -1,0 +1,22 @@
+[
+  {
+    "id": "split_patterns",
+    "caption": "Blackbox: Split Highlighted Pattern Variables",
+    "command": "split_patterns"
+  }, 
+  {
+    "id": "insert_type",
+    "caption": "Blackbox: Insert Type Line for Function",
+    "command": "insert_type"
+  }, 
+  {
+    "id": "in_scope",
+    "caption": "Blackbox: Whats Variables Scope Here",
+    "command": "in_scope"
+  }, 
+  {
+    "id": "in_scope_type",
+    "caption": "Blackbox: Whats Types In Scope Here",
+    "command": "in_scope_type"
+  }
+]

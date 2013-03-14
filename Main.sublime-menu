@@ -1,0 +1,53 @@
+[
+    {
+        "id": "tools",
+        "children":
+        [{
+            "caption": "Blackbox",
+            "mnemonic": "r",
+            "id": "Blackbox",
+            "children":
+                [
+                    {"caption": "Split Pattern", "command": "split_pattern", "args": {"scope": "selection"}}
+                ]
+        }]
+    },
+
+    {
+        "caption": "Preferences",
+        "mnemonic": "n",
+        "id": "preferences",
+        "children":
+        [
+            {
+                "caption": "Package Settings",
+                "mnemonic": "P",
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "caption": "Blackbox",
+                        "children":
+                        [
+                            {
+                                "command": "open_file", "args":
+                                {
+                                    "file": "${packages}/Blackbox/Blackbox.sublime-settings"
+                                },
+                                "caption": "Settings – Default"
+                            },
+                            {
+                                "command": "open_file", "args":
+                                {
+                                    "file": "${packages}/User/Blackbox.sublime-settings"
+                                },
+                                "caption": "Settings – User"
+                            },
+                            { "caption": "-" }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
