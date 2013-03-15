@@ -1,3 +1,9 @@
 {
-	// No default settings yet
+	// Finding binarys on a system can sometimes be tricky, especially
+	// As plugins in SB2 have no way to access your full PATH.
+	// If blackbox-sb2 can't find these binarys on your sysyem
+	// you'll have to define the path to them here.
+	"ghci_path": "",
+	"cabal_path": "",
+	"blackbox_path": ""
 }

@@ -4,22 +4,22 @@ import sublime
 import subprocess
 import tempfile
 
-
 def can_run_blackbox(view): 
     log("Testing wether or not blackbox can be run on this machine")
     # We don't support running this plugin on windows yet
     if sublime.platform() == "windows":
       sublime.error_message("Unfortunately Windows is unsupported at this time.")
       return False
+    settings = sublime.load_settings("Blackbox.sublime-settings")
     # Make sure the user has the ghci binary installed
-    if not which('ghci'):
+    if not which(settings.get("ghci_path", "ghci")):
       sublime.error_message("Please ensure you have ghci installed")
       return False  
     # Make sure the user has the blackbox binary installed
-    if not which('/Users/darren/Library/Haskell/bin/cabal'):
+    if not which(settings.get("cabal_path", "cabal")):
       sublime.error_message("Please ensure you have cabal installed")
       return False       # Make sure the user has the blackbox binary installed
-    if not which('/Users/darren/Library/Haskell/bin/blackbox'):
+    if not which(settings.get("blackbox_path", "blackbox")):
       sublime.error_message("Please ensure you have the blackbox binary installed. It can be installed via Cabal: `cabal install blackbox`")
       return False   
     # Ensure we have been passed haskell source
@@ -27,6 +27,7 @@ def can_run_blackbox(view):
     if 'haskell' not in syntax_file_for_view:
         sublime.error_message("This plugin only works with Haskell source files")
         return False
+        # lhs files
     # We need the file to be saved to disk before we can work on it
     # This is required so a copy of the working directory can be made
     # So we can edit it on the fly. Fo example to plug errors
@@ -35,7 +36,7 @@ def can_run_blackbox(view):
       sublime.error_message("Please save the file before continuing")
       return False      
     return True
-
+    
 def which(program):
     cmd = 'which ' + program 
     exit_code, out, err = call_and_wait(cmd)
@@ -47,8 +48,10 @@ def is_exe(fpath):
     return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
 def run_blackbox(infile, markupfile):
-    blackbox = which('/Users/darren/Library/Haskell/bin/blackbox')
-    cmd = blackbox + ' -f \'' + infile + '\' -m \'' + markupfile + '\''
+    settings = sublime.load_settings("Blackbox.sublime-settings")
+    blackbox = which(settings.get("blackbox_path", "blackbox"))
+    ghci = which(settings.get("ghci_path", "ghci"))
+    cmd = blackbox + ' -f \'' + infile + '\' -m \'' + markupfile + '\' -g \'' + ghci + '\'' 
     log("About to fork blackbox: " + cmd)
     exit_code, out, err = call_and_wait(cmd)
     log(exit_code)
