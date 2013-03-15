@@ -27,7 +27,10 @@ class SplitPatternsCommand(sublime_plugin.TextCommand):
     os.close(temp_fd)
     # Run Blackbox
     exit_code, out, err = run_blackbox(self.view.file_name(), temp_path)
-    self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    if exit_code == 0: 
+      self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    else:
+      sublime.error_message("Blackbox failed to respond: " + err)
     # Tidy Up
     os.remove(temp_path)
 
@@ -53,7 +56,10 @@ class InsertTypeCommand(sublime_plugin.TextCommand):
     os.write(temp_fd, body)
     os.close(temp_fd)
     exit_code, out, err = run_blackbox(self.view.file_name(), temp_path)
-    self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    if exit_code == 0: 
+      self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    else:
+      sublime.error_message("Blackbox failed to respond: " + err)
     # Tidy Up
     os.remove(temp_path)
 
@@ -79,7 +85,10 @@ class InScopeTypeCommand(sublime_plugin.TextCommand):
     os.write(temp_fd, body)
     os.close(temp_fd)
     exit_code, out, err = run_blackbox(self.view.file_name(), temp_path)
-    self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    if exit_code == 0: 
+      self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    else:
+      sublime.error_message("Blackbox failed to respond: " + err)
     os.remove(temp_path)
 
   def tag_regions(self, edit, view):
@@ -104,7 +113,10 @@ class InScopeCommand(sublime_plugin.TextCommand):
     os.write(temp_fd, body)
     os.close(temp_fd)
     exit_code, out, err = run_blackbox(self.view.file_name(), temp_path)
-    self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    if exit_code == 0: 
+      self.view.replace(edit, sublime.Region(0, self.view.size()), out)
+    else:
+      sublime.error_message("Blackbox failed to respond: " + err)
     os.remove(temp_path)
 
   def tag_regions(self, edit, view):

@@ -13,14 +13,14 @@ def can_run_blackbox(view):
     settings = sublime.load_settings("Blackbox.sublime-settings")
     # Make sure the user has the ghci binary installed
     if not which(settings.get("ghci_path", "ghci")):
-      sublime.error_message("Please ensure you have ghci installed")
+      cant_find_prog("Couldn't find the ghci binary on your PATH\n\nIf you have cabal installed please define the path to it in the Plugin preferences")
       return False  
     # Make sure the user has the blackbox binary installed
     if not which(settings.get("cabal_path", "cabal")):
-      sublime.error_message("Please ensure you have cabal installed")
+      cant_find_prog("Couldn't find the cabal binary on your PATH\n\nIf you have cabal installed please define the path to it in the Plugin preferences")
       return False       # Make sure the user has the blackbox binary installed
     if not which(settings.get("blackbox_path", "blackbox")):
-      sublime.error_message("Please ensure you have the blackbox binary installed. It can be installed via Cabal: `cabal install blackbox`")
+      cant_find_prog("Couldn't find the blackbox binary on your PATH\n\nIf you have cabal installed please define the path to it in the Plugin preferences\n\nIf you don't have it installed it can be installed via\n'cabal install blackbox'")
       return False   
     # Ensure we have been passed haskell source
     syntax_file_for_view = view.settings().get('syntax').lower()
@@ -36,6 +36,9 @@ def can_run_blackbox(view):
       sublime.error_message("Please save the file before continuing")
       return False      
     return True
+
+def cant_find_prog(msg):
+    sublime.error_message(msg)
     
 def which(program):
     cmd = 'which ' + program 
