@@ -15,8 +15,8 @@
     "command": "in_scope"
   }, 
   {
-    "id": "in_scope_type",
-    "caption": "Blackbox: Whats Types In Scope Here",
-    "command": "in_scope_type"
+    "id": "dummy_process",
+    "caption": "Blackbox: Send an unaltered file through Blackbox",
+    "command": "dummy_process"
   }
 ]

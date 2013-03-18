@@ -14,11 +14,8 @@ def can_run_blackbox(view):
     # Make sure the user has the ghci binary installed
     if not which(settings.get("ghci_path", "ghci")):
       cant_find_prog("Couldn't find the ghci binary on your PATH\n\nIf you have cabal installed please define the path to it in the Plugin preferences")
-      return False  
+      return False        
     # Make sure the user has the blackbox binary installed
-    if not which(settings.get("cabal_path", "cabal")):
-      cant_find_prog("Couldn't find the cabal binary on your PATH\n\nIf you have cabal installed please define the path to it in the Plugin preferences")
-      return False       # Make sure the user has the blackbox binary installed
     if not which(settings.get("blackbox_path", "blackbox")):
       cant_find_prog("Couldn't find the blackbox binary on your PATH\n\nIf you have cabal installed please define the path to it in the Plugin preferences\n\nIf you don't have it installed it can be installed via\n'cabal install blackbox'")
       return False   
@@ -27,14 +24,20 @@ def can_run_blackbox(view):
     if 'haskell' not in syntax_file_for_view:
         sublime.error_message("This plugin only works with Haskell source files")
         return False
-        # lhs files
-    # We need the file to be saved to disk before we can work on it
+    # We need the file to be saved to disk befo`re we can work on it
     # This is required so a copy of the working directory can be made
     # So we can edit it on the fly. Fo example to plug errors
     file_name = view.file_name()
     if not file_name:
       sublime.error_message("Please save the file before continuing")
-      return False      
+      return False    
+    # The Her Lexer parser kit doesn't support lhs files
+    # so neither does blackbox
+    fn, ext = os.path.splitext(file_name)
+    if ext == '.lhs':
+      sublime.error_message("Blackbox does not support lhs files")
+      return False   
+
     return True
 
 def cant_find_prog(msg):
@@ -46,9 +49,6 @@ def which(program):
     if exit_code == 0:
       return out.strip()
     return None
-
-def is_exe(fpath):
-    return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
 def run_blackbox(infile, markupfile):
     settings = sublime.load_settings("Blackbox.sublime-settings")
