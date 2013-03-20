@@ -11,12 +11,12 @@
   }, 
   {
     "id": "in_scope",
-    "caption": "Blackbox: Whats Variables Scope Here",
+    "caption": "Blackbox: What Variables are in Scope",
     "command": "in_scope"
   }, 
   {
     "id": "dummy_process",
-    "caption": "Blackbox: Send an unaltered file through Blackbox",
+    "caption": "Blackbox: Testing",
     "command": "dummy_process"
   }
 ]
