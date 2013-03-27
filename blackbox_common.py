@@ -17,7 +17,7 @@ def can_run_blackbox(view):
       return False        
     # Make sure the user has the blackbox binary installed
     if not which(settings.get("blackbox_path", "blackbox")):
-      cant_find_prog("Couldn't find the blackbox binary on your PATH\n\nIf you have blackbox installed please define the path to it in the Plugin preferences\n\nIf you don't have it installed it can be installed from\nhttps://github.com/DarrenMowat/blackbox'")
+      cant_find_prog("Couldn't find the blackbox binary on your PATH\n\nIf you have blackbox installed please define the path to it in the Plugin preferences\n\nIf you don't it can be installed from\nhttps://github.com/DarrenMowat/blackbox'")
       return False   
     # Ensure we have been passed haskell source
     syntax_file_for_view = view.settings().get('syntax').lower()
