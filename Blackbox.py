@@ -32,7 +32,7 @@ class SplitPatternsCommand(sublime_plugin.TextCommand):
     if exit_code == 0: 
       self.view.replace(edit, sublime.Region(0, self.view.size()), out)
     else:
-      sublime.error_message("Blackbox failed to respond: " + err)
+      sublime.error_message("An error occurred: " + err)
       self.view.replace(edit, sublime.Region(0, self.view.size()), body)
     # Reset viewport
     self.view.set_viewport_position(vpos)
@@ -64,7 +64,7 @@ class InsertTypeCommand(sublime_plugin.TextCommand):
     if exit_code == 0: 
       self.view.replace(edit, sublime.Region(0, self.view.size()), out)
     else:
-      sublime.error_message("Blackbox failed to respond: " + err)
+      sublime.error_message("An error occurred: " + err)
       self.view.replace(edit, sublime.Region(0, self.view.size()), body)
     self.view.set_viewport_position(vpos)
     # Tidy Up
@@ -95,7 +95,7 @@ class InScopeCommand(sublime_plugin.TextCommand):
     if exit_code == 0: 
       self.view.replace(edit, sublime.Region(0, self.view.size()), out)
     else:
-      sublime.error_message("Blackbox failed to respond: " + err)
+      sublime.error_message("An error occurred: " + err)
       self.view.replace(edit, sublime.Region(0, self.view.size()), body)
     self.view.set_viewport_position(vpos)
     os.remove(temp_path)
@@ -120,7 +120,7 @@ class DummyProcessCommand(sublime_plugin.TextCommand):
     if exit_code == 0: 
       self.view.replace(edit, sublime.Region(0, self.view.size()), out)
     else:
-      sublime.error_message("Blackbox failed to respond: " + err)
+      sublime.error_message("An error occurred: " + err)
       self.view.replace(edit, sublime.Region(0, self.view.size()), body)
     self.view.set_viewport_position(vpos)
     os.remove(temp_path)
