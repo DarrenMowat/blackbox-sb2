@@ -1,8 +1,5 @@
 ![Blackbox](https://raw.github.com/DarrenMowat/blackbox-sb2/master/doc/Blackbox.png)
 
-**Note:** This project has been developed as part of my final year individual project for my Computer Science degree. It would be great if you could try it out and provide some feedback via this survey http://freeonlinesurveys.com/s.asp?sid=xt53mcv8i07i5um223226 
-*Thanks*
-
 Blackbox is a Haskell source code transformer which allows you to find out interesting things about your program. The main aim of Blackbox is to act as a backend for text editor plugins which helps to expose the type system of Haskell to the user.
 
 This is a plugin developed using Blackbox for Sublime Text 2. The plugin currently supports 
